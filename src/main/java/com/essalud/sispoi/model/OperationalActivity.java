@@ -1,4 +1,5 @@
 package com.essalud.sispoi.model;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
@@ -7,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -15,6 +17,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -59,8 +62,14 @@ public class OperationalActivity {
     private CostCenter costCenter;
 
     @ManyToOne
-    @JoinColumn(name = "id_measurement", nullable = false, foreignKey = @ForeignKey(name = "FK_OPERATIONAL_ACTIVITY_MEASUREMENT"))
-    private Measurement measurement;
+    @JoinColumn(name = "id_measurement_type", nullable = false, foreignKey = @ForeignKey(name = "FK_OPERATIONAL_ACTIVITY_MEASUREMENT_TYPE"))
+    private MeasurementType measurementType;
+
+    @Column(length = 250, nullable = false)
+    private String measurementUnit;
+
+    @OneToMany(mappedBy = "operationalActivity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Goal> goals;
 
     @ManyToOne
     @JoinColumn(name = "id_priority", nullable = false, foreignKey = @ForeignKey(name = "FK_OPERATIONAL_ACTIVITY_PRIORITY"))

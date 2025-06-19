@@ -1,10 +1,15 @@
 package com.essalud.sispoi.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -19,21 +24,27 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Measurement {
+public class Goal {
 
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idMeasurement;
-
-    @Column(length = 70, nullable = false)
-    private String name;
-
-    @Column(length = 500, nullable = false)
-    private String description;
+    private Integer idGoal;
     
     @Column(nullable = false)
     private Boolean active;
+
+    @ManyToOne
+    @JoinColumn(name = "id_operational_activity", nullable = false, foreignKey = @ForeignKey(name = "FK_META_OPERATIONAL_ACTIVITY"))
+    private OperationalActivity operationalActivity;
+
+    @Min(1)
+    @Max(4)
+    @Column(nullable = false)
+    private Integer goalOrder;
+
+    @Column(nullable = false)
+    private Double value;
 
     @Column(nullable = false)
     private LocalDateTime createTime;

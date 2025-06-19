@@ -7,10 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -25,26 +22,28 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Formulation {
+public class BudgetItem {
 
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idFormulation;
+    private Integer idBudgetItem;
 
+    @Column(length = 10, nullable = false)
+    private String codPoFi;
+
+    @Column(length = 70, nullable = false)
+    private String name;
+
+    @Column(length = 500, nullable = false)
+    private String description;
+    
     @Column(nullable = false)
     private Boolean active;
 
     @ManyToOne
-    @JoinColumn(name = "id_dependency", nullable = false, foreignKey = @ForeignKey(name = "FK_FORMULATION_DEPENDENCY"))
-    private Dependency dependency;
-
-    @ManyToOne
-    @JoinColumn(name = "id_formulation_state", nullable = false, foreignKey = @ForeignKey(name = "FK_FORMULATION_FORMULATION_STATE"))
-    private FormulationState formulationState;
-
-    @OneToOne(mappedBy = "formulation")
-    private FormulationSupportFile formulationSupportFile;
+    @JoinColumn(name = "id_budget_type", nullable = false, foreignKey = @ForeignKey(name = "FK_BUDGET_ITEM_BUDGET_TYPE"))
+    private BudgetType budgetType;
 
     @Column(nullable = false)
     private LocalDateTime createTime;
@@ -53,10 +52,5 @@ public class Formulation {
     protected void onCreate() {
         this.createTime = LocalDateTime.now();
     }
-
-    @Min(2000)
-    @Max(2100)
-    @Column(nullable = false)
-    private Integer year;
 
 }

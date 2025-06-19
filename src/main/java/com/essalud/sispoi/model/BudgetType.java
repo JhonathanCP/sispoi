@@ -1,12 +1,9 @@
 package com.essalud.sispoi.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -22,15 +19,12 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class CostCenter {
+public class BudgetType {
 
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idCostCenter;
-
-    @Column(length = 10, nullable = false)
-    private String costCenterCode;
+    private Integer idBudgetType;
 
     @Column(length = 70, nullable = false)
     private String name;
@@ -39,11 +33,7 @@ public class CostCenter {
     private String description;
     
     @Column(nullable = false)
-    private Boolean active;
-
-    @ManyToOne
-    @JoinColumn(name = "id_dependency", nullable = false, foreignKey = @ForeignKey(name = "FK_COST_CENTER_DEPENDENCY"))
-    private Dependency dependency;
+    private Boolean active;    
 
     @Column(nullable = false)
     private LocalDateTime createTime;

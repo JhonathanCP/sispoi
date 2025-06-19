@@ -28,8 +28,8 @@ public class StrategicObjectiveFileServiceImpl extends _CRUDImpl<StrategicObject
 	}
 
 	@Override
-	public byte[] getFile(Integer idMediaFile) {		
-		Optional<StrategicObjectiveFile> op = repo.findById(idMediaFile);		
+	public byte[] getFile(Integer idStrategicObjectiveFile) {		
+		Optional<StrategicObjectiveFile> op = repo.findById(idStrategicObjectiveFile);		
 		return op.isPresent() ? op.get().getFile() : new byte[0];
 	}
 

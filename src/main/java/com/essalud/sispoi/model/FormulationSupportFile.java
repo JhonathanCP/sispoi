@@ -1,16 +1,12 @@
 package com.essalud.sispoi.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -25,26 +21,21 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Formulation {
+public class FormulationSupportFile {
 
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idFormulation;
+    private Integer idFormulationSupportFile;
+
+    @Column(length = 70, nullable = false)
+    private String name;
+    
+    @Column(length = 15, nullable = false)
+    private String fileExtension;
 
     @Column(nullable = false)
     private Boolean active;
-
-    @ManyToOne
-    @JoinColumn(name = "id_dependency", nullable = false, foreignKey = @ForeignKey(name = "FK_FORMULATION_DEPENDENCY"))
-    private Dependency dependency;
-
-    @ManyToOne
-    @JoinColumn(name = "id_formulation_state", nullable = false, foreignKey = @ForeignKey(name = "FK_FORMULATION_FORMULATION_STATE"))
-    private FormulationState formulationState;
-
-    @OneToOne(mappedBy = "formulation")
-    private FormulationSupportFile formulationSupportFile;
 
     @Column(nullable = false)
     private LocalDateTime createTime;
@@ -54,9 +45,12 @@ public class Formulation {
         this.createTime = LocalDateTime.now();
     }
 
-    @Min(2000)
-    @Max(2100)
-    @Column(nullable = false)
-    private Integer year;
+    @Column
+    private byte[] file;
+
+    // Relación bidireccional con Formulation
+    @OneToOne
+    @JoinColumn(name = "id_formulation", referencedColumnName = "idFormulation", nullable = false)
+    private Formulation formulation;
 
 }

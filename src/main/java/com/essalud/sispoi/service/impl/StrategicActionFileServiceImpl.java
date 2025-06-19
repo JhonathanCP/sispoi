@@ -28,8 +28,8 @@ public class StrategicActionFileServiceImpl extends _CRUDImpl<StrategicActionFil
 	}
 
 	@Override
-	public byte[] getFile(Integer idMediaFile) {		
-		Optional<StrategicActionFile> op = repo.findById(idMediaFile);		
+	public byte[] getFile(Integer idStrategicActionFile) {		
+		Optional<StrategicActionFile> op = repo.findById(idStrategicActionFile);		
 		return op.isPresent() ? op.get().getFile() : new byte[0];
 	}
 
