@@ -26,7 +26,7 @@ public class StrategicActionFile {
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idStrategicObjectiveFile;
+    private Integer idStrategicActionFile;
 
     @Column(length = 70, nullable = false)
     private String name;

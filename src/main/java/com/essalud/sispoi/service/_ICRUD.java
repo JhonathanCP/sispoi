@@ -2,7 +2,7 @@ package com.essalud.sispoi.service;
 
 import java.util.List;
 
-public interface ICRUD<T, ID> {
+public interface _ICRUD<T, ID> {
 
     T save(T t);
 

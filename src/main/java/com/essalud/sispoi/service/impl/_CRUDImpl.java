@@ -2,12 +2,12 @@ package com.essalud.sispoi.service.impl;
 
 import java.util.List;
 
-import com.essalud.sispoi.repo.IGenericRepo;
-import com.essalud.sispoi.service.ICRUD;
+import com.essalud.sispoi.repo._IGenericRepo;
+import com.essalud.sispoi.service._ICRUD;
 
-public abstract class CRUDImpl<T, ID> implements ICRUD<T, ID> {
+public abstract class _CRUDImpl<T, ID> implements _ICRUD<T, ID> {
 
-    protected abstract IGenericRepo<T, ID> getRepo();
+    protected abstract _IGenericRepo<T, ID> getRepo();
 
     @Override
     public T save(T t) {

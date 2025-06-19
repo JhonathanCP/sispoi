@@ -3,6 +3,6 @@ package com.essalud.sispoi.repo;
 import com.essalud.sispoi.model.StrategicObjective;
 
 
-public interface IStrategicObjectiveRepo extends IGenericRepo<StrategicObjective, Integer>{
+public interface IStrategicObjectiveRepo extends _IGenericRepo<StrategicObjective, Integer>{
 
 }
