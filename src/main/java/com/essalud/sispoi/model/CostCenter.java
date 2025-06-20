@@ -38,7 +38,7 @@ public class CostCenter {
     @Column(length = 500)
     private String description;
     
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "boolean default true")
     private Boolean active;
 
     @ManyToOne

@@ -25,7 +25,6 @@ public class DependencyTypeDTO {
     @Size(max = 500)
     private String description;
     
-    @NotNull
     private Boolean active;
 
     private LocalDateTime createTime;

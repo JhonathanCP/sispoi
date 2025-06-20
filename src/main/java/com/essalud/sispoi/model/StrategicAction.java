@@ -33,7 +33,7 @@ public class StrategicAction {
     @Column(length = 70, nullable = false)
     private String name;
     
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "boolean default true")
     private Boolean active;
 
     @OneToOne(mappedBy = "strategicAction")

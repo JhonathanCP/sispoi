@@ -31,7 +31,7 @@ public class Goal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idGoal;
     
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "boolean default true")
     private Boolean active;
 
     @ManyToOne

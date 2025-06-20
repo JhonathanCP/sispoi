@@ -29,7 +29,6 @@ public class OperationalActivityDTO {
     @Size(max = 70)
     private String name;
     
-    @NotNull
     private Boolean active;
 
     @NotNull

@@ -25,7 +25,6 @@ public class FormulationSupportFileDTO {
     @Size(max = 15)
     private String fileExtension;
 
-    @NotNull
     private Boolean active;
 
     private LocalDateTime createTime;

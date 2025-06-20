@@ -17,7 +17,6 @@ public class FormulationDTO {
     @EqualsAndHashCode.Include
     private Integer idFormulation;
 
-    @NotNull
     private Boolean active;
 
     @NotNull

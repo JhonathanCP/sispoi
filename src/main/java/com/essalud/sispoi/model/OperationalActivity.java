@@ -38,7 +38,7 @@ public class OperationalActivity {
     @Column(length = 70, nullable = false)
     private String name;
     
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "boolean default true")
     private Boolean active;
 
     @ManyToOne

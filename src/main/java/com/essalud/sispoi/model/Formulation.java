@@ -32,7 +32,7 @@ public class Formulation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idFormulation;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "boolean default true")
     private Boolean active;
 
     @ManyToOne

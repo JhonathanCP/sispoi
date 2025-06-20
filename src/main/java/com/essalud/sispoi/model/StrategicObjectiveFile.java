@@ -34,7 +34,7 @@ public class StrategicObjectiveFile {
     @Column(length = 15, nullable = false)
     private String fileExtension;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "boolean default true")
     private Boolean active;
 
     @Column(nullable = false)
