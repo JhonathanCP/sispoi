@@ -29,7 +29,7 @@ public class FinancialFund {
     @Column(length = 70, nullable = false)
     private String name;
 
-    @Column(length = 500, nullable = false)
+    @Column(length = 500)
     private String description;
     
     @Column(nullable = false)
