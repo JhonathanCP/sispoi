@@ -13,23 +13,23 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true )
-public class StrategicActionDTO {
+public class StrategicObjectiveFileDTO {
 
     @EqualsAndHashCode.Include
-    private Integer idStrategicAction;
+    private Integer idStrategicObjectiveFile;
 
     @NotNull
     @Size(max = 70)
     private String name;
 
-    private StrategicActionFileDTO strategicActionFile;
+    @Size(max = 15)
+    private String fileExtension;
 
-    @NotNull
-    private StrategicObjectiveDTO strategicObjective;
-    
     @NotNull
     private Boolean active;
 
     private LocalDateTime createTime;
+
+    private byte[] file;
 
 }

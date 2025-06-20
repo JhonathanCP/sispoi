@@ -13,16 +13,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true )
-public class StrategicActionDTO {
+public class StrategicObjectiveDTO {
 
     @EqualsAndHashCode.Include
-    private Integer idStrategicAction;
+    private Integer idStrategicObjective;
 
     @NotNull
     @Size(max = 70)
     private String name;
 
-    private StrategicActionFileDTO strategicActionFile;
+    private StrategicObjectiveFileDTO strategicObjectiveFile;
 
     @NotNull
     private StrategicObjectiveDTO strategicObjective;

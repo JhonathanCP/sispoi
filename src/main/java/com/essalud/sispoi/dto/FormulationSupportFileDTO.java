@@ -32,7 +32,4 @@ public class FormulationSupportFileDTO {
 
     private byte[] file;
 
-    @NotNull
-    private FormulationDTO formulation;
-
 }

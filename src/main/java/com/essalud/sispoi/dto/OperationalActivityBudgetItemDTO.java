@@ -2,8 +2,9 @@ package com.essalud.sispoi.dto;
 
 import java.time.LocalDateTime;
 
+import com.essalud.sispoi.model.enums.MonthEnum;
+
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -13,22 +14,17 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true )
-public class StrategicActionDTO {
-
-    @EqualsAndHashCode.Include
-    private Integer idStrategicAction;
+public class OperationalActivityBudgetItemDTO {
 
     @NotNull
-    @Size(max = 70)
-    private String name;
-
-    private StrategicActionFileDTO strategicActionFile;
+    private OperationalActivityDTO operationalActivity;
 
     @NotNull
-    private StrategicObjectiveDTO strategicObjective;
-    
-    @NotNull
-    private Boolean active;
+    private BudgetItemDTO budgetItem;
+
+    private Double amount;
+
+    private MonthEnum month;
 
     private LocalDateTime createTime;
 
