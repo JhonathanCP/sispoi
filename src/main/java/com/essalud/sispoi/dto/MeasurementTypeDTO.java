@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 public class MeasurementTypeDTO {
 
     @EqualsAndHashCode.Include
-    private Integer idManagementCenter;
+    private Integer idMeasurementType;
 
     @NotNull
     @Size(max = 70)
@@ -25,7 +25,7 @@ public class MeasurementTypeDTO {
     @Size(max = 500)
     private String description;
     
-    private Boolean active;
+    private Boolean active = true;
 
     private LocalDateTime createTime;
 

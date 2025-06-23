@@ -25,7 +25,7 @@ public class DependencyDTO {
     @Size(max = 500)
     private String description;
     
-    private Boolean active;
+    private Boolean active = true;
 
     @NotNull
     private DependencyTypeDTO dependencyType;

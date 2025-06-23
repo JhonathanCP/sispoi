@@ -29,7 +29,7 @@ public class CostCenterDTO {
     @Size(max = 500)
     private String description;
     
-    private Boolean active;
+    private Boolean active = true;
 
     @NotNull
     private DependencyDTO dependency;

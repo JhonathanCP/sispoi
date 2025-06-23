@@ -21,7 +21,7 @@ public class GoalDTO {
     @EqualsAndHashCode.Include
     private Integer idGoal;
 
-    private Boolean active;
+    private Boolean active = true;
 
     @JsonBackReference
     @NotNull

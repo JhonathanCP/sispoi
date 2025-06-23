@@ -29,7 +29,7 @@ public class OperationalActivityDTO {
     @Size(max = 70)
     private String name;
     
-    private Boolean active;
+    private Boolean active = true;
 
     @NotNull
     private StrategicActionDTO strategicAction;

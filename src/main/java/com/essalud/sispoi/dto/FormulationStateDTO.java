@@ -25,7 +25,7 @@ public class FormulationStateDTO {
     @Size(max = 500)
     private String description;
 
-    private Boolean active;
+    private Boolean active = true;
 
     private LocalDateTime createTime;
 

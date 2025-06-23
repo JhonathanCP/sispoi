@@ -17,7 +17,7 @@ public class FormulationDTO {
     @EqualsAndHashCode.Include
     private Integer idFormulation;
 
-    private Boolean active;
+    private Boolean active = true;
 
     @NotNull
     private DependencyDTO dependency;

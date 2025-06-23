@@ -27,7 +27,7 @@ public class StrategicActionDTO {
     @NotNull
     private StrategicObjectiveDTO strategicObjective;
     
-    private Boolean active;
+    private Boolean active = true;
 
     private LocalDateTime createTime;
 

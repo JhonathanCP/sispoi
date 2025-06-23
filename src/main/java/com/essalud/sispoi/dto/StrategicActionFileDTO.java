@@ -25,7 +25,7 @@ public class StrategicActionFileDTO {
     @Size(max = 15)
     private String fileExtension;
 
-    private Boolean active;
+    private Boolean active = true;
 
     private LocalDateTime createTime;
 
