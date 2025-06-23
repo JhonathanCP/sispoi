@@ -69,6 +69,7 @@ public class GoalController {
         if(obj == null){
             throw new ModelNotFoundException("ID DOES NOT EXIST: " + dto.getIdGoal());
         }
+        dto.setCreateTime(obj.getCreateTime());
         return new ResponseEntity<>(service.update(mapper.map(dto, Goal.class)), HttpStatus.OK);
     }
 

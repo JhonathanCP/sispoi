@@ -23,9 +23,6 @@ public class StrategicObjectiveDTO {
     private String name;
 
     private StrategicObjectiveFileDTO strategicObjectiveFile;
-
-    @NotNull
-    private StrategicObjectiveDTO strategicObjective;
     
     private Boolean active = true;
 

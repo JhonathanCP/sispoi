@@ -69,6 +69,7 @@ public class BudgetItemController {
         if(obj == null){
             throw new ModelNotFoundException("ID DOES NOT EXIST: " + dto.getIdBudgetItem());
         }
+        dto.setCreateTime(obj.getCreateTime());
         return new ResponseEntity<>(service.update(mapper.map(dto, BudgetItem.class)), HttpStatus.OK);
     }
 

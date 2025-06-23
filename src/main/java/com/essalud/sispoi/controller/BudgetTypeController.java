@@ -69,6 +69,7 @@ public class BudgetTypeController {
         if(obj == null){
             throw new ModelNotFoundException("ID DOES NOT EXIST: " + dto.getIdBudgetType());
         }
+        dto.setCreateTime(obj.getCreateTime());
         return new ResponseEntity<>(service.update(mapper.map(dto, BudgetType.class)), HttpStatus.OK);
     }
 

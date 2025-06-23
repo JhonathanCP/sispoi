@@ -69,6 +69,7 @@ public class ManagementCenterController {
         if(obj == null){
             throw new ModelNotFoundException("ID DOES NOT EXIST: " + dto.getIdManagementCenter());
         }
+        dto.setCreateTime(obj.getCreateTime());
         return new ResponseEntity<>(service.update(mapper.map(dto, ManagementCenter.class)), HttpStatus.OK);
     }
 

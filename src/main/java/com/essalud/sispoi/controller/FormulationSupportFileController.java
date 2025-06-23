@@ -35,7 +35,7 @@ public class FormulationSupportFileController {
     private IFormulationSupportFileService service;
 
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-	public ResponseEntity<Integer> saveFormulationSupportFile(@RequestParam("file") MultipartFile file, @RequestParam("idFileType") Integer idFileType) throws Exception{
+	public ResponseEntity<Integer> saveFormulationSupportFile(@RequestParam("file") MultipartFile file) throws Exception{
 
 		int rpta = 0;
 
@@ -50,23 +50,23 @@ public class FormulationSupportFileController {
 		return new ResponseEntity<Integer>(rpta, HttpStatus.OK);
 	}
 	
-	@GetMapping("/{idForumationSupportFile}")
-    public ResponseEntity<FormulationSupportFileDTO> findById(@PathVariable Integer idForumationSupportFile) {
+	@GetMapping("/{idFormulationSupportFile}")
+    public ResponseEntity<FormulationSupportFileDTO> findById(@PathVariable Integer idFormulationSupportFile) {
         FormulationSupportFileDTO dtoResponse;
-        FormulationSupportFile obj = service.findById(idForumationSupportFile);
+        FormulationSupportFile obj = service.findById(idFormulationSupportFile);
 
         if (obj == null) {
-            throw new ModelNotFoundException("ID DOES NOT EXIST: " + idForumationSupportFile);
+            throw new ModelNotFoundException("ID DOES NOT EXIST: " + idFormulationSupportFile);
         } else {
             dtoResponse = mapper.map(obj, FormulationSupportFileDTO.class);
         }
         return new ResponseEntity<>(dtoResponse, HttpStatus.OK);
     }
 
-	@GetMapping(value = "/{idForumationSupportFile}/file", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
-	public ResponseEntity<byte[]> getFormulationSupportFile(@PathVariable("idForumationSupportFile") Integer idForumationSupportFile) throws IOException {
+	@GetMapping(value = "/{idFormulationSupportFile}/file", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	public ResponseEntity<byte[]> getFormulationSupportFile(@PathVariable("idFormulationSupportFile") Integer idFormulationSupportFile) throws IOException {
 
-		byte[] arr = service.getFile(idForumationSupportFile);
+		byte[] arr = service.getFile(idFormulationSupportFile);
 
 		return new ResponseEntity<>(arr, HttpStatus.OK);
 	}

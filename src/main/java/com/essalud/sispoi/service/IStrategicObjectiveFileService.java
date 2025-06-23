@@ -9,4 +9,6 @@ public interface IStrategicObjectiveFileService extends _ICRUD<StrategicObjectiv
 
 	byte[] getFile(Integer idStrategicObjectiveFile);
 
+    StrategicObjectiveFile findByStrategicObjectiveId(Integer idStrategicObjective);
+
 }

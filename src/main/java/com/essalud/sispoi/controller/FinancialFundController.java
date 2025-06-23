@@ -69,6 +69,7 @@ public class FinancialFundController {
         if(obj == null){
             throw new ModelNotFoundException("ID DOES NOT EXIST: " + dto.getIdFinancialFund());
         }
+        dto.setCreateTime(obj.getCreateTime());
         return new ResponseEntity<>(service.update(mapper.map(dto, FinancialFund.class)), HttpStatus.OK);
     }
 

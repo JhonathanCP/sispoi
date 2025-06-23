@@ -69,6 +69,7 @@ public class PriorityController {
         if(obj == null){
             throw new ModelNotFoundException("ID DOES NOT EXIST: " + dto.getIdPriority());
         }
+        dto.setCreateTime(obj.getCreateTime());
         return new ResponseEntity<>(service.update(mapper.map(dto, Priority.class)), HttpStatus.OK);
     }
 

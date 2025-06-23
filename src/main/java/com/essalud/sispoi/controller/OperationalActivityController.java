@@ -69,6 +69,7 @@ public class OperationalActivityController {
         if(obj == null){
             throw new ModelNotFoundException("ID DOES NOT EXIST: " + dto.getIdOperationalActivity());
         }
+        dto.setCreateTime(obj.getCreateTime());
         return new ResponseEntity<>(service.update(mapper.map(dto, OperationalActivity.class)), HttpStatus.OK);
     }
 

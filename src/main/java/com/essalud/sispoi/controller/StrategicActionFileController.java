@@ -35,7 +35,7 @@ public class StrategicActionFileController {
     private IStrategicActionFileService service;
 
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-	public ResponseEntity<Integer> saveStrategicActionFile(@RequestParam("file") MultipartFile file, @RequestParam("idFileType") Integer idFileType) throws Exception{
+	public ResponseEntity<Integer> saveStrategicActionFile(@RequestParam("file") MultipartFile file) throws Exception{
 
 		int rpta = 0;
 
@@ -50,23 +50,23 @@ public class StrategicActionFileController {
 		return new ResponseEntity<Integer>(rpta, HttpStatus.OK);
 	}
 	
-	@GetMapping("/{idForumationSupportFile}")
-    public ResponseEntity<StrategicActionFileDTO> findById(@PathVariable Integer idForumationSupportFile) {
+	@GetMapping("/{idStrategicActionFile}")
+    public ResponseEntity<StrategicActionFileDTO> findById(@PathVariable Integer idStrategicActionFile) {
         StrategicActionFileDTO dtoResponse;
-        StrategicActionFile obj = service.findById(idForumationSupportFile);
+        StrategicActionFile obj = service.findById(idStrategicActionFile);
 
         if (obj == null) {
-            throw new ModelNotFoundException("ID DOES NOT EXIST: " + idForumationSupportFile);
+            throw new ModelNotFoundException("ID DOES NOT EXIST: " + idStrategicActionFile);
         } else {
             dtoResponse = mapper.map(obj, StrategicActionFileDTO.class);
         }
         return new ResponseEntity<>(dtoResponse, HttpStatus.OK);
     }
 
-	@GetMapping(value = "/{idForumationSupportFile}/file", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
-	public ResponseEntity<byte[]> getStrategicActionFile(@PathVariable("idForumationSupportFile") Integer idForumationSupportFile) throws IOException {
+	@GetMapping(value = "/{idStrategicActionFile}/file", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	public ResponseEntity<byte[]> getStrategicActionFile(@PathVariable("idStrategicActionFile") Integer idStrategicActionFile) throws IOException {
 
-		byte[] arr = service.getFile(idForumationSupportFile);
+		byte[] arr = service.getFile(idStrategicActionFile);
 
 		return new ResponseEntity<>(arr, HttpStatus.OK);
 	}

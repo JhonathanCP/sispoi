@@ -69,6 +69,7 @@ public class MeasurementTypeController {
         if(obj == null){
             throw new ModelNotFoundException("ID DOES NOT EXIST: " + dto.getIdMeasurementType());
         }
+        dto.setCreateTime(obj.getCreateTime());
         return new ResponseEntity<>(service.update(mapper.map(dto, MeasurementType.class)), HttpStatus.OK);
     }
 
