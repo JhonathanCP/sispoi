@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.essalud.sispoi.dto.FormulationSupportFileDTO;
 import com.essalud.sispoi.exception.ModelNotFoundException;
+import com.essalud.sispoi.model.Formulation;
 import com.essalud.sispoi.model.FormulationSupportFile;
+import com.essalud.sispoi.service.IFormulationService;
 import com.essalud.sispoi.service.IFormulationSupportFileService;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,6 +35,9 @@ public class FormulationSupportFileController {
 
     @Autowired
     private IFormulationSupportFileService service;
+
+    @Autowired
+    private IFormulationService formulationService;
 
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
 	public ResponseEntity<Integer> saveFormulationSupportFile(@RequestParam("file") MultipartFile file) throws Exception{
@@ -49,6 +54,33 @@ public class FormulationSupportFileController {
 
 		return new ResponseEntity<Integer>(rpta, HttpStatus.OK);
 	}
+
+    @PostMapping(value = "/update", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public ResponseEntity<Void> updateFormulationSupportFile(
+                @RequestParam("idFormulation") Integer idFormulation,
+                @RequestParam("file") MultipartFile file
+            ) throws Exception {
+
+        Formulation formulation = formulationService.findById(idFormulation);
+        if (formulation == null) {
+            throw new ModelNotFoundException("Formulation ID DOES NOT EXIST: " + idFormulation);
+        }
+
+        // Busca el archivo asociado al Formulation (relación 1 a 1)
+        FormulationSupportFile existingFile = service.findByFormulationId(idFormulation);
+        if (existingFile == null) {
+            throw new ModelNotFoundException("FormulationSupportFile for Formulation ID DOES NOT EXIST: " + idFormulation);
+        }
+
+        existingFile.setFileExtension(file.getContentType());
+        existingFile.setName(file.getOriginalFilename());
+        existingFile.setFile(file.getBytes());
+        // Puedes actualizar otros campos si lo necesitas
+
+        service.saveFile(existingFile);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 	
 	@GetMapping("/{idFormulationSupportFile}")
     public ResponseEntity<FormulationSupportFileDTO> findById(@PathVariable Integer idFormulationSupportFile) {

@@ -9,4 +9,6 @@ public interface IFormulationSupportFileService extends _ICRUD<FormulationSuppor
 
 	byte[] getFile(Integer idFormulationSupportFile);
 
+    FormulationSupportFile findByFormulationId(Integer idFormulation);
+
 }

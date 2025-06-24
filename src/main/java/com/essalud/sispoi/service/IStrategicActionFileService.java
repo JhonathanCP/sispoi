@@ -9,4 +9,6 @@ public interface IStrategicActionFileService extends _ICRUD<StrategicActionFile,
 
 	byte[] getFile(Integer idStrategicActionFile);
 
+    StrategicActionFile findByStrategicActionId(Integer idStrategicAction);
+
 }

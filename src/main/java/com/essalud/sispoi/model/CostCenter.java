@@ -41,6 +41,9 @@ public class CostCenter {
     @Column(nullable = false, columnDefinition = "boolean default true")
     private Boolean active;
 
+    @Column(nullable = false)
+    private Boolean head;
+
     @ManyToOne
     @JoinColumn(name = "id_dependency", nullable = false, foreignKey = @ForeignKey(name = "FK_COST_CENTER_DEPENDENCY"))
     private Dependency dependency;

@@ -22,15 +22,12 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class BudgetItem {
+public class ActivityDetail {
 
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idBudgetItem;
-
-    @Column(length = 10, nullable = false)
-    private String codPoFi;
+    private Integer idActivityDetail;
 
     @Column(length = 70, nullable = false)
     private String name;
@@ -42,12 +39,14 @@ public class BudgetItem {
     private Boolean active;
 
     @ManyToOne
-    @JoinColumn(name = "id_budget_type", nullable = false, foreignKey = @ForeignKey(name = "FK_BUDGET_ITEM_BUDGET_TYPE"))
-    private BudgetType budgetType;
+    @JoinColumn(name = "id_dependency_type", nullable = false, foreignKey = @ForeignKey(name = "FK_ACTIVITY_DETAIL_DEPENDENCY_TYPE"))
+    private DependencyType dependencyType;
+
+    private Boolean head;
 
     @ManyToOne
-    @JoinColumn(name = "id_budget_category", nullable = false, foreignKey = @ForeignKey(name = "FK_BUDGET_ITEM_BUDGET_CATEGORY"))
-    private BudgetCategory budgetCategory;
+    @JoinColumn(name = "id_operational_activity", nullable = false, foreignKey = @ForeignKey(name = "FK_ACTIVITY_DETAIL_OPERATIONAL_ACTIVITY"))
+    private OperationalActivity operationalActivity;
 
     @Column(nullable = false)
     private LocalDateTime createTime;

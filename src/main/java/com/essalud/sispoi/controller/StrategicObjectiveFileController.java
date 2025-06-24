@@ -61,9 +61,9 @@ public class StrategicObjectiveFileController {
 
     @PostMapping(value = "/update", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity<Void> updateStrategicObjectiveFile(
-            @RequestParam("idStrategicObjective") Integer idStrategicObjective,
-            @RequestParam("file") MultipartFile file
-    ) throws Exception {
+                @RequestParam("idStrategicObjective") Integer idStrategicObjective,
+                @RequestParam("file") MultipartFile file
+            ) throws Exception {
 
         StrategicObjective strategicObjective = strategicObjectiveService.findById(idStrategicObjective);
         if (strategicObjective == null) {

@@ -1,6 +1,8 @@
 package com.essalud.sispoi.dto;
 
 import java.time.LocalDateTime;
+import java.util.EnumMap;
+import java.util.Map;
 
 import com.essalud.sispoi.model.enums.MonthEnum;
 
@@ -22,9 +24,7 @@ public class OperationalActivityBudgetItemDTO {
     @NotNull
     private BudgetItemDTO budgetItem;
 
-    private Double amount;
-
-    private MonthEnum month;
+    private Map<MonthEnum, Double> monthAmounts = new EnumMap<>(MonthEnum.class);
 
     private LocalDateTime createTime;
 

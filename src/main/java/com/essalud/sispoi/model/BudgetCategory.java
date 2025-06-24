@@ -1,7 +1,6 @@
 package com.essalud.sispoi.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -22,15 +21,12 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class BudgetItem {
+public class BudgetCategory {
 
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idBudgetItem;
-
-    @Column(length = 10, nullable = false)
-    private String codPoFi;
+    private Integer idBudgetCategory;
 
     @Column(length = 70, nullable = false)
     private String name;
@@ -41,14 +37,6 @@ public class BudgetItem {
     @Column(nullable = false, columnDefinition = "boolean default true")
     private Boolean active;
 
-    @ManyToOne
-    @JoinColumn(name = "id_budget_type", nullable = false, foreignKey = @ForeignKey(name = "FK_BUDGET_ITEM_BUDGET_TYPE"))
-    private BudgetType budgetType;
-
-    @ManyToOne
-    @JoinColumn(name = "id_budget_category", nullable = false, foreignKey = @ForeignKey(name = "FK_BUDGET_ITEM_BUDGET_CATEGORY"))
-    private BudgetCategory budgetCategory;
-
     @Column(nullable = false)
     private LocalDateTime createTime;
 
@@ -56,5 +44,9 @@ public class BudgetItem {
     protected void onCreate() {
         this.createTime = LocalDateTime.now();
     }
+
+    @ManyToOne
+    @JoinColumn(name = "id_parent_category", referencedColumnName = "idBudgetCategory")
+    private BudgetCategory parentCategory;
 
 }

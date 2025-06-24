@@ -29,4 +29,6 @@ public class FormulationDTO {
 
     private LocalDateTime createTime;
 
+    private Integer year;
+
 }
