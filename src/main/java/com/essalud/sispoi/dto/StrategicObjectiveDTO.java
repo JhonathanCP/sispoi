@@ -19,7 +19,11 @@ public class StrategicObjectiveDTO {
     private Integer idStrategicObjective;
 
     @NotNull
-    @Size(max = 70)
+    @Size(max = 2)
+    private String code;
+
+    @NotNull
+    @Size(max = 500)
     private String name;
 
     private StrategicObjectiveFileDTO strategicObjectiveFile;
@@ -27,5 +31,9 @@ public class StrategicObjectiveDTO {
     private Boolean active = true;
 
     private LocalDateTime createTime;
+
+    private Integer startYear;
+
+    private Integer endYear;
 
 }

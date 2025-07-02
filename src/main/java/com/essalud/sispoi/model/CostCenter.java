@@ -32,7 +32,7 @@ public class CostCenter {
     @Column(length = 10, nullable = false)
     private String costCenterCode;
 
-    @Column(length = 70, nullable = false)
+    @Column(length = 500, nullable = false)
     private String name;
 
     @Column(length = 500)
@@ -48,7 +48,7 @@ public class CostCenter {
     @JoinColumn(name = "id_dependency", nullable = false, foreignKey = @ForeignKey(name = "FK_COST_CENTER_DEPENDENCY"))
     private Dependency dependency;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "timestamp default now()")
     private LocalDateTime createTime;
 
     @PrePersist

@@ -26,6 +26,8 @@ public class OperationalActivityBudgetItemDTO {
 
     private Map<MonthEnum, Double> monthAmounts = new EnumMap<>(MonthEnum.class);
 
+    private ExpenseTypeDTO expenseType;
+
     private LocalDateTime createTime;
 
 }

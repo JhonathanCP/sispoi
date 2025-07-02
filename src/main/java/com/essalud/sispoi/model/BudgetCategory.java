@@ -28,7 +28,7 @@ public class BudgetCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idBudgetCategory;
 
-    @Column(length = 70, nullable = false)
+    @Column(length = 500, nullable = false)
     private String name;
 
     @Column(length = 500)
@@ -37,7 +37,7 @@ public class BudgetCategory {
     @Column(nullable = false, columnDefinition = "boolean default true")
     private Boolean active;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "timestamp default now()")
     private LocalDateTime createTime;
 
     @PrePersist

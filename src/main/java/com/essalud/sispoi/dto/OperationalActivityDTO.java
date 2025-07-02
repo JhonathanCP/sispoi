@@ -26,7 +26,7 @@ public class OperationalActivityDTO {
     private String sapCode;
 
     @NotNull
-    @Size(max = 70)
+    @Size(max = 500)
     private String name;
     
     private Boolean active = true;

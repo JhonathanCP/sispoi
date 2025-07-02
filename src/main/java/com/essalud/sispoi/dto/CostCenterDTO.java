@@ -23,13 +23,16 @@ public class CostCenterDTO {
     private String costCenterCode;
 
     @NotNull
-    @Size(max = 70)
+    @Size(max = 500)
     private String name;
 
     @Size(max = 500)
     private String description;
     
     private Boolean active = true;
+
+    @NotNull
+    private Boolean head;
 
     @NotNull
     private DependencyDTO dependency;

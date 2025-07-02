@@ -18,65 +18,65 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.essalud.sispoi.dto.BudgetItemDTO;
+import com.essalud.sispoi.dto.ExpenseTypeDTO;
 import com.essalud.sispoi.exception.ModelNotFoundException;
-import com.essalud.sispoi.model.BudgetItem;
-import com.essalud.sispoi.service.IBudgetItemService;
+import com.essalud.sispoi.model.ExpenseType;
+import com.essalud.sispoi.service.IExpenseTypeService;
 
 import jakarta.validation.Valid;
 
 
 @RestController
-@RequestMapping("/budget-item")
-public class BudgetItemController {
+@RequestMapping("/expense-type")
+public class ExpenseTypeController {
 
     @Autowired
-    private IBudgetItemService service;
+    private IExpenseTypeService service;
 
     @Autowired
     private ModelMapper mapper;
 
     @GetMapping
-    public ResponseEntity<List<BudgetItemDTO>> findAll() {
-        List<BudgetItemDTO> list = service.findAll().stream().map(p -> mapper.map(p, BudgetItemDTO.class)).collect(Collectors.toList());
+    public ResponseEntity<List<ExpenseTypeDTO>> findAll() {
+        List<ExpenseTypeDTO> list = service.findAll().stream().map(p -> mapper.map(p, ExpenseTypeDTO.class)).collect(Collectors.toList());
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<BudgetItemDTO> findById(@PathVariable Integer id) {
+    public ResponseEntity<ExpenseTypeDTO> findById(@PathVariable Integer id) {
 
-        BudgetItemDTO dtoResponse;
-        BudgetItem obj = service.findById(id);
+        ExpenseTypeDTO dtoResponse;
+        ExpenseType obj = service.findById(id);
 
         if(obj == null){
             throw new ModelNotFoundException("ID DOES NOT EXIST: " + id);
         }else{
-            dtoResponse = mapper.map(obj, BudgetItemDTO.class);
+            dtoResponse = mapper.map(obj, ExpenseTypeDTO.class);
         }
         return new ResponseEntity<>(dtoResponse, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Void> save(@Valid @RequestBody BudgetItemDTO dto) {
-        BudgetItem p = service.save(mapper.map(dto, BudgetItem.class));
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(p.getIdBudgetItem()).toUri();
+    public ResponseEntity<Void> save(@Valid @RequestBody ExpenseTypeDTO dto) {
+        ExpenseType p = service.save(mapper.map(dto, ExpenseType.class));
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(p.getIdExpenseType()).toUri();
         return ResponseEntity.created(location).build();
     }
 
     @PutMapping
-    public ResponseEntity<BudgetItem> update(@Valid @RequestBody BudgetItemDTO dto) {
-        BudgetItem obj = service.findById(dto.getIdBudgetItem());
+    public ResponseEntity<ExpenseType> update(@Valid @RequestBody ExpenseTypeDTO dto) {
+        ExpenseType obj = service.findById(dto.getIdExpenseType());
         if(obj == null){
-            throw new ModelNotFoundException("ID DOES NOT EXIST: " + dto.getIdBudgetItem());
+            throw new ModelNotFoundException("ID DOES NOT EXIST: " + dto.getIdExpenseType());
         }
         dto.setCreateTime(obj.getCreateTime());
-        return new ResponseEntity<>(service.update(mapper.map(dto, BudgetItem.class)), HttpStatus.OK);
+        return new ResponseEntity<>(service.update(mapper.map(dto, ExpenseType.class)), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Integer id) {
 
-        BudgetItem obj = service.findById(id);
+        ExpenseType obj = service.findById(id);
 
         if(obj == null){
             throw new ModelNotFoundException("ID DOES NOT EXIST: " + id);

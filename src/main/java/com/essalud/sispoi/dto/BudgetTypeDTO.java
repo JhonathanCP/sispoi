@@ -19,7 +19,7 @@ public class BudgetTypeDTO {
     private Integer idBudgetType;
 
     @NotNull
-    @Size(max = 70)
+    @Size(max = 500)
     private String name;
 
     @Size(max = 500)

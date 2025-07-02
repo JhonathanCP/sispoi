@@ -6,6 +6,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -27,7 +29,10 @@ public class StrategicObjective {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idStrategicObjective;
 
-    @Column(length = 70, nullable = false)
+    @Column(length = 2, nullable = false)
+    private String code;
+
+    @Column(length = 500, nullable = false)
     private String name;
     
     @Column(nullable = false, columnDefinition = "boolean default true")
@@ -36,12 +41,22 @@ public class StrategicObjective {
     @OneToOne(mappedBy = "strategicObjective")
     private StrategicObjectiveFile strategicObjectiveFile;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "timestamp default now()")
     private LocalDateTime createTime;
 
     @PrePersist
     protected void onCreate() {
         this.createTime = LocalDateTime.now();
     }
+
+    @Min(2000)
+    @Max(2200)
+    @Column(nullable = false)
+    private Integer startYear;
+
+    @Min(2000)
+    @Max(2200)
+    @Column(nullable = false)
+    private Integer endYear;
 
 }

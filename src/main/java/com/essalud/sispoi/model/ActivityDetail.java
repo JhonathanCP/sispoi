@@ -29,7 +29,7 @@ public class ActivityDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idActivityDetail;
 
-    @Column(length = 70, nullable = false)
+    @Column(length = 500, nullable = false)
     private String name;
 
     @Column(length = 500)
@@ -45,10 +45,10 @@ public class ActivityDetail {
     private Boolean head;
 
     @ManyToOne
-    @JoinColumn(name = "id_operational_activity", nullable = false, foreignKey = @ForeignKey(name = "FK_ACTIVITY_DETAIL_OPERATIONAL_ACTIVITY"))
-    private OperationalActivity operationalActivity;
+    @JoinColumn(name = "id_strategic_action", nullable = false, foreignKey = @ForeignKey(name = "FK_ACTIVITY_DETAIL_STRATEGIC_ACTION"))
+    private StrategicAction strategicAction;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "timestamp default now()")
     private LocalDateTime createTime;
 
     @PrePersist

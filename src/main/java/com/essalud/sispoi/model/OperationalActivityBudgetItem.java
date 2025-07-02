@@ -36,7 +36,7 @@ public class OperationalActivityBudgetItem {
     @Id
     private BudgetItem budgetItem;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "timestamp default now()")
     private LocalDateTime createTime;
 
     // @Column(nullable = false)

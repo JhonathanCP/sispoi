@@ -13,10 +13,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true )
-public class ManagementCenterDTO {
+public class ActivityDetailDTO {
 
     @EqualsAndHashCode.Include
-    private Integer idManagementCenter;
+    private Integer idActivityDetail;
 
     @NotNull
     @Size(max = 500)
@@ -24,19 +24,17 @@ public class ManagementCenterDTO {
 
     @Size(max = 500)
     private String description;
-
-    @NotNull
-    @Size(max = 10)
-    private String managementCenterCode;
     
     private Boolean active = true;
 
-    private LocalDateTime createTime;
-
     @NotNull
+    private DependencyTypeDTO dependencyType;
+
     private Boolean head;
 
     @NotNull
-    private DependencyDTO dependency;
+    private StrategicActionDTO strategicAction;
+
+    private LocalDateTime createTime;
 
 }

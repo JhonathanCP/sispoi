@@ -30,7 +30,10 @@ public class StrategicAction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idStrategicAction;
 
-    @Column(length = 70, nullable = false)
+    @Column(length = 2, nullable = false)
+    private String code;
+
+    @Column(length = 500, nullable = false)
     private String name;
     
     @Column(nullable = false, columnDefinition = "boolean default true")
@@ -43,7 +46,7 @@ public class StrategicAction {
     @JoinColumn(name = "id_strategic_objective", nullable = false, foreignKey = @ForeignKey(name = "FK_MEDIA_FILE_FILE_TYPE"))
     private StrategicObjective strategicObjective;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "timestamp default now()")
     private LocalDateTime createTime;
 
     @PrePersist

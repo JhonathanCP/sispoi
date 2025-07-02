@@ -29,7 +29,7 @@ public class Dependency {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idDependency;
 
-    @Column(length = 70, nullable = false)
+    @Column(length = 500, nullable = false)
     private String name;
 
     @Column(length = 500)
@@ -42,7 +42,7 @@ public class Dependency {
     @JoinColumn(name = "id_dependency_type", nullable = false, foreignKey = @ForeignKey(name = "FK_DEPENDENCY_DEPENDENCY_TYPE"))
     private DependencyType dependencyType;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "timestamp default now()")
     private LocalDateTime createTime;
 
     @PrePersist

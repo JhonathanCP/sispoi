@@ -35,7 +35,7 @@ public class OperationalActivity {
     @Column(length = 16, nullable = false)
     private String sapCode;
 
-    @Column(length = 70, nullable = false)
+    @Column(length = 500, nullable = false)
     private String name;
     
     @Column(nullable = false, columnDefinition = "boolean default true")
@@ -75,7 +75,7 @@ public class OperationalActivity {
     @JoinColumn(name = "id_priority", nullable = false, foreignKey = @ForeignKey(name = "FK_OPERATIONAL_ACTIVITY_PRIORITY"))
     private Priority priority;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "timestamp default now()")
     private LocalDateTime createTime;
 
     @PrePersist

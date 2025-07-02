@@ -1217,7 +1217,7 @@ Launcher Type: SUN_STANDARD
    size_t NewSize                                  = 34603008                                  {product} {ergonomic}
     uintx NonNMethodCodeHeapSize                   = 5839372                                {pd product} {ergonomic}
     uintx NonProfiledCodeHeapSize                  = 122909434                              {pd product} {ergonomic}
-   size_t OldSize                                  = 70254592                                  {product} {ergonomic}
+   size_t OldSize                                  = 500254592                                  {product} {ergonomic}
     uintx ProfiledCodeHeapSize                     = 122909434                              {pd product} {ergonomic}
     uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
      bool SegmentedCodeCache                       = true                                      {product} {ergonomic}

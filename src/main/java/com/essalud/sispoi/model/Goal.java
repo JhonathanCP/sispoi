@@ -46,7 +46,7 @@ public class Goal {
     @Column(nullable = false)
     private Double value;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "timestamp default now()")
     private LocalDateTime createTime;
 
     @PrePersist

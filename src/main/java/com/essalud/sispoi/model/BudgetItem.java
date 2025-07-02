@@ -32,7 +32,7 @@ public class BudgetItem {
     @Column(length = 10, nullable = false)
     private String codPoFi;
 
-    @Column(length = 70, nullable = false)
+    @Column(length = 500, nullable = false)
     private String name;
 
     @Column(length = 500)
@@ -49,7 +49,7 @@ public class BudgetItem {
     @JoinColumn(name = "id_budget_category", nullable = false, foreignKey = @ForeignKey(name = "FK_BUDGET_ITEM_BUDGET_CATEGORY"))
     private BudgetCategory budgetCategory;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "timestamp default now()")
     private LocalDateTime createTime;
 
     @PrePersist

@@ -46,7 +46,7 @@ public class Formulation {
     @OneToOne(mappedBy = "formulation")
     private FormulationSupportFile formulationSupportFile;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "timestamp default now()")
     private LocalDateTime createTime;
 
     @PrePersist
