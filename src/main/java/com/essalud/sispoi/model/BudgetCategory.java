@@ -28,6 +28,9 @@ public class BudgetCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idBudgetCategory;
 
+    @Column(length = 10, nullable = false)
+    private String codPoFi;
+
     @Column(length = 500, nullable = false)
     private String name;
 

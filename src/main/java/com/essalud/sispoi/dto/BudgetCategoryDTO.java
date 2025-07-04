@@ -19,6 +19,10 @@ public class BudgetCategoryDTO {
     private Integer idBudgetCategory;
 
     @NotNull
+    @Size(max = 10)
+    private String codPoFi;
+
+    @NotNull
     @Size(max = 500)
     private String name;
 
