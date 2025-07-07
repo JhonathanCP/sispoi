@@ -64,5 +64,14 @@ public class OperationalActivityDTO {
     private PriorityDTO priority;
 
     private LocalDateTime createTime;
+    
+    @NotNull
+    private Float goods;
+    
+    @NotNull
+    private Float remuneration;
+    
+    @NotNull
+    private Float services;
 
 }

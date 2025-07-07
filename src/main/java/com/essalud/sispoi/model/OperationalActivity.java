@@ -94,5 +94,14 @@ public class OperationalActivity {
     protected void onCreate() {
         this.createTime = LocalDateTime.now();
     }
+    
+    @Column(nullable = false)
+    private Float goods;
+    
+    @Column(nullable = false)
+    private Float remuneration;
+    
+    @Column(nullable = false)
+    private Float services;
 
 }

@@ -35,8 +35,4 @@ public class StrategicActionDTO {
 
     private LocalDateTime createTime;
 
-    private Integer startYear;
-
-    private Integer endYear;
-
 }
