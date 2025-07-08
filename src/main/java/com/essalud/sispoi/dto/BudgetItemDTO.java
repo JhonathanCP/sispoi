@@ -28,7 +28,7 @@ public class BudgetItemDTO {
 
     @Size(max = 500)
     private String description;
-    
+
     private Boolean active = true;
 
     @NotNull
