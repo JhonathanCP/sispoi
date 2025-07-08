@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.essalud.sispoi.dto.FormulationDTO;
+import com.essalud.sispoi.dto.FormulationSearchDTO;
 import com.essalud.sispoi.exception.ModelNotFoundException;
+import com.essalud.sispoi.model.Dependency;
 import com.essalud.sispoi.model.Formulation;
 import com.essalud.sispoi.service.IFormulationService;
 
@@ -85,5 +87,19 @@ public class FormulationController {
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @PostMapping("/search")
+    public ResponseEntity<List<FormulationDTO>> findByDependencyAndYear(@Valid @RequestBody FormulationSearchDTO request) {
+        // Mapeo explícito de DependencyDTO a Dependency
+        Dependency dependency = mapper.map(request.getDependency(), Dependency.class);
+
+        List<Formulation> formulations = service.findByDependencyAndYear(dependency, request.getYear());
+        List<FormulationDTO> list = formulations.stream()
+            .map(f -> mapper.map(f, FormulationDTO.class))
+            .collect(Collectors.toList());
+
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
 
 }

@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.essalud.sispoi.dto.OperationalActivityDTO;
+import com.essalud.sispoi.dto.OperationalActivitySearchDTO;
 import com.essalud.sispoi.exception.ModelNotFoundException;
+import com.essalud.sispoi.model.Formulation;
 import com.essalud.sispoi.model.OperationalActivity;
 import com.essalud.sispoi.service.IOperationalActivityService;
 
@@ -84,6 +86,18 @@ public class OperationalActivityController {
             service.delete(id);
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping("/search")
+    public ResponseEntity<List<OperationalActivityDTO>> findByFormulation(@Valid @RequestBody OperationalActivitySearchDTO request) {
+        Formulation formulation = mapper.map(request.getFormulation(), Formulation.class);
+
+        List<OperationalActivity> activities = service.findByFormulation(formulation);
+        List<OperationalActivityDTO> result = activities.stream()
+            .map(oa -> mapper.map(oa, OperationalActivityDTO.class))
+            .collect(Collectors.toList());
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
 }
