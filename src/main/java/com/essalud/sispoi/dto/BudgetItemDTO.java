@@ -34,6 +34,9 @@ public class BudgetItemDTO {
     @NotNull
     private BudgetTypeDTO budgetType;
 
+    @NotNull
+    private BudgetCategoryDTO budgetCategory;
+
     private LocalDateTime createTime;
 
 }
