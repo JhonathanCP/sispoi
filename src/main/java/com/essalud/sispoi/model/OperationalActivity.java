@@ -37,6 +37,9 @@ public class OperationalActivity {
     @Column(length = 16, nullable = false)
     private String sapCode;
 
+    @Column(length = 3)
+    private String correlativeCode;
+
     @Column(length = 500, nullable = false)
     private String name;
     

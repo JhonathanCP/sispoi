@@ -1,6 +1,5 @@
 package com.essalud.sispoi.controller;
 
-import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.essalud.sispoi.dto.MeasurementTypeDTO;
 import com.essalud.sispoi.exception.ModelNotFoundException;
@@ -57,10 +55,10 @@ public class MeasurementTypeController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> save(@Valid @RequestBody MeasurementTypeDTO dto) {
+    public ResponseEntity<MeasurementTypeDTO> save(@Valid @RequestBody MeasurementTypeDTO dto) {
         MeasurementType p = service.save(mapper.map(dto, MeasurementType.class));
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(p.getIdMeasurementType()).toUri();
-        return ResponseEntity.created(location).build();
+        MeasurementTypeDTO dtoResponse = (mapper.map(p, MeasurementTypeDTO.class));; 
+        return new ResponseEntity<>(dtoResponse, HttpStatus.OK);
     }
 
     @PutMapping

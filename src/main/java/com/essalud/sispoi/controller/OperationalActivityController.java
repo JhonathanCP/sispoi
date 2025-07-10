@@ -1,6 +1,5 @@
 package com.essalud.sispoi.controller;
 
-import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,8 +15,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import com.essalud.sispoi.dto.OperationalActivityDTO;
 import com.essalud.sispoi.dto.OperationalActivitySearchDTO;
 import com.essalud.sispoi.exception.ModelNotFoundException;
@@ -59,11 +56,12 @@ public class OperationalActivityController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> save(@Valid @RequestBody OperationalActivityDTO dto) {
+    public ResponseEntity<OperationalActivityDTO> save(@Valid @RequestBody OperationalActivityDTO dto) {
         OperationalActivity p = service.save(mapper.map(dto, OperationalActivity.class));
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(p.getIdOperationalActivity()).toUri();
-        return ResponseEntity.created(location).build();
+        OperationalActivityDTO dtoResponse = (mapper.map(p, OperationalActivityDTO.class));; 
+        return new ResponseEntity<>(dtoResponse, HttpStatus.OK);
     }
+
 
     @PutMapping
     public ResponseEntity<OperationalActivity> update(@Valid @RequestBody OperationalActivityDTO dto) {
@@ -98,6 +96,12 @@ public class OperationalActivityController {
             .collect(Collectors.toList());
 
         return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @GetMapping("/higher-correlative-code/cost-center/{idCostCenter}")
+    public ResponseEntity<String> getHigherCorrelativeCodeByCostCenter(@PathVariable Integer idCostCenter) {
+        String higherCode = service.getHigherCorrelativeCodeByCostCenter(idCostCenter);
+        return new ResponseEntity<>(higherCode, HttpStatus.OK);
     }
 
 }

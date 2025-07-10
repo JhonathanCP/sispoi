@@ -31,4 +31,8 @@ public class FormulationDTO {
 
     private Integer year;
 
+    private Integer modification;
+
+    private Integer quarter;
+
 }

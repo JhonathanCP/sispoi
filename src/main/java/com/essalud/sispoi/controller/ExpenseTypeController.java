@@ -1,6 +1,5 @@
 package com.essalud.sispoi.controller;
 
-import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.essalud.sispoi.dto.ExpenseTypeDTO;
 import com.essalud.sispoi.exception.ModelNotFoundException;
@@ -57,10 +55,10 @@ public class ExpenseTypeController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> save(@Valid @RequestBody ExpenseTypeDTO dto) {
+    public ResponseEntity<ExpenseTypeDTO> save(@Valid @RequestBody ExpenseTypeDTO dto) {
         ExpenseType p = service.save(mapper.map(dto, ExpenseType.class));
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(p.getIdExpenseType()).toUri();
-        return ResponseEntity.created(location).build();
+        ExpenseTypeDTO dtoResponse = (mapper.map(p, ExpenseTypeDTO.class));; 
+        return new ResponseEntity<>(dtoResponse, HttpStatus.OK);
     }
 
     @PutMapping

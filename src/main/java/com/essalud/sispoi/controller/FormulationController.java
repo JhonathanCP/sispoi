@@ -1,6 +1,5 @@
 package com.essalud.sispoi.controller;
 
-import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,13 +15,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.essalud.sispoi.dto.FormulationDTO;
 import com.essalud.sispoi.dto.FormulationSearchDTO;
 import com.essalud.sispoi.exception.ModelNotFoundException;
-import com.essalud.sispoi.model.Dependency;
 import com.essalud.sispoi.model.Formulation;
+import com.essalud.sispoi.model.Dependency;
 import com.essalud.sispoi.service.IFormulationService;
 
 import jakarta.validation.Valid;
@@ -59,10 +57,10 @@ public class FormulationController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> save(@Valid @RequestBody FormulationDTO dto) {
+    public ResponseEntity<FormulationDTO> save(@Valid @RequestBody FormulationDTO dto) {
         Formulation p = service.save(mapper.map(dto, Formulation.class));
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(p.getIdFormulation()).toUri();
-        return ResponseEntity.created(location).build();
+        FormulationDTO dtoResponse = (mapper.map(p, FormulationDTO.class));; 
+        return new ResponseEntity<>(dtoResponse, HttpStatus.OK);
     }
 
     @PutMapping
@@ -101,5 +99,19 @@ public class FormulationController {
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
+    @PostMapping("/add-modification/{idOriginalFormulation}/{newQuarter}")
+    public ResponseEntity<FormulationDTO> addModification(
+            @PathVariable("idOriginalFormulation") Integer idOriginalFormulation,
+            @PathVariable("newQuarter") Integer newQuarter) {
+
+        // Validate quarter input (1 to 4)
+        if (newQuarter < 1 || newQuarter > 4) {
+            throw new IllegalArgumentException("Quarter must be between 1 and 4.");
+        }
+
+        Formulation newFormulation = service.addModification(idOriginalFormulation, newQuarter);
+        FormulationDTO dtoResponse = mapper.map(newFormulation, FormulationDTO.class);
+        return new ResponseEntity<>(dtoResponse, HttpStatus.CREATED); // Use CREATED status for new resource
+    }
 
 }

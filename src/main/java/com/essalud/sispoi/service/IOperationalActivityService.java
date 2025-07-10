@@ -10,4 +10,6 @@ public interface IOperationalActivityService extends _ICRUD<OperationalActivity,
 
     List<OperationalActivity> findByFormulation(Formulation formulation);
 
+    String getHigherCorrelativeCodeByCostCenter(Integer idCostCenter);
+
 }

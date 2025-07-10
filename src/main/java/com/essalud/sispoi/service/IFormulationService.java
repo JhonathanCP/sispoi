@@ -11,4 +11,6 @@ public interface IFormulationService extends _ICRUD<Formulation, Integer> {
 
     List<Formulation> findByDependencyAndYear(Dependency dependency, Integer year);
 
+    Formulation addModification(Integer originalFormulationId, Integer newQuarter);
+
 }

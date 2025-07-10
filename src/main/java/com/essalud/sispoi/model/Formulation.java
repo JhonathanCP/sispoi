@@ -59,4 +59,12 @@ public class Formulation {
     @Column(nullable = false)
     private Integer year;
 
+    @Min(1)
+    @Max(8)
+    private Integer modification;
+
+    @Min(1)
+    @Max(4)
+    private Integer quarter;
+
 }

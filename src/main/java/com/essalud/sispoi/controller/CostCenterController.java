@@ -1,6 +1,5 @@
 package com.essalud.sispoi.controller;
 
-import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,11 +15,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.essalud.sispoi.dto.CostCenterDTO;
+
 import com.essalud.sispoi.exception.ModelNotFoundException;
 import com.essalud.sispoi.model.CostCenter;
+
 import com.essalud.sispoi.service.ICostCenterService;
 
 import jakarta.validation.Valid;
@@ -57,10 +57,10 @@ public class CostCenterController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> save(@Valid @RequestBody CostCenterDTO dto) {
+    public ResponseEntity<CostCenterDTO> save(@Valid @RequestBody CostCenterDTO dto) {
         CostCenter p = service.save(mapper.map(dto, CostCenter.class));
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(p.getIdCostCenter()).toUri();
-        return ResponseEntity.created(location).build();
+        CostCenterDTO dtoResponse = (mapper.map(p, CostCenterDTO.class));; 
+        return new ResponseEntity<>(dtoResponse, HttpStatus.OK);
     }
 
     @PutMapping

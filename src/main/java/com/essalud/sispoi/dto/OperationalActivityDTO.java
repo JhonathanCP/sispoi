@@ -25,6 +25,9 @@ public class OperationalActivityDTO {
     @Size(max = 16)
     private String sapCode;
 
+    @Size(max = 3)
+    private String correlativeCode;
+
     @NotNull
     @Size(max = 500)
     private String name;
