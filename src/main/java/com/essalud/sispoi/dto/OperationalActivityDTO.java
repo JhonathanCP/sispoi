@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true )
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class OperationalActivityDTO {
 
     @EqualsAndHashCode.Include

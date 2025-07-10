@@ -96,8 +96,8 @@ public class OperationalActivityBudgetItemController {
             throw new ModelNotFoundException("IDs DO NOT EXIST: " + idOperationalActivity + ", " + idBudgetItem);
         }
         dto.setCreateTime(obj.getCreateTime());
-        OperationalActivityBudgetItem updated = service.update(mapper.map(dto, OperationalActivityBudgetItem.class));
-        return new ResponseEntity<>(updated, HttpStatus.OK);
+        service.update(mapper.map(dto, OperationalActivityBudgetItem.class));
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     // Eliminar un registro específico por ambos IDs

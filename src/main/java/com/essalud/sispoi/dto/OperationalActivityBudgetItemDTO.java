@@ -24,6 +24,9 @@ public class OperationalActivityBudgetItemDTO {
     @NotNull
     private BudgetItemDTO budgetItem;
 
+    @NotNull
+    private Integer orderItem;
+
     private Map<MonthEnum, Double> monthAmounts = new EnumMap<>(MonthEnum.class);
 
     private ExpenseTypeDTO expenseType;

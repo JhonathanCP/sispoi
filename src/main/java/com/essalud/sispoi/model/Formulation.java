@@ -64,7 +64,7 @@ public class Formulation {
     private Integer modification;
 
     @Min(1)
-    @Max(4)
+    @Max(5)
     private Integer quarter;
 
 }

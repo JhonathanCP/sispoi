@@ -65,13 +65,21 @@ public class OperationalActivityController {
 
     @PutMapping
     public ResponseEntity<OperationalActivity> update(@Valid @RequestBody OperationalActivityDTO dto) {
-        OperationalActivity obj = service.findById(dto.getIdOperationalActivity());
-        if(obj == null){
+        OperationalActivity existing = service.findById(dto.getIdOperationalActivity());
+
+        if (existing == null) {
             throw new ModelNotFoundException("ID DOES NOT EXIST: " + dto.getIdOperationalActivity());
         }
-        dto.setCreateTime(obj.getCreateTime());
-        return new ResponseEntity<>(service.update(mapper.map(dto, OperationalActivity.class)), HttpStatus.OK);
+
+        OperationalActivity updated = mapper.map(dto, OperationalActivity.class);
+        updated.setGoals(existing.getGoals());
+        updated.setCreateTime(existing.getCreateTime());
+
+        service.update(updated); // ✅ ACTUALIZACIÓN REAL
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Integer id) {

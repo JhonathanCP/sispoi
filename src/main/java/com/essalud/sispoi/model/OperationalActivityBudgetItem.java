@@ -36,22 +36,20 @@ public class OperationalActivityBudgetItem {
     @Id
     private BudgetItem budgetItem;
 
+    @Id
+    @Column(name = "order_item")
+    private Integer orderItem;
+
     @Column(nullable = false, columnDefinition = "timestamp default now()")
     private LocalDateTime createTime;
-
-    // @Column(nullable = false)
-    // private Double amount;
-
-    // @Enumerated(EnumType.STRING)
-    // @Column(nullable = false, length = 16)
-    // private MonthEnum month;
 
     @ElementCollection
     @CollectionTable(
         name = "operational_activity_budget_item_month_amount",
         joinColumns = {
-            @jakarta.persistence.JoinColumn(name = "id_operational_activity", referencedColumnName = "id_operational_activity"),
-            @jakarta.persistence.JoinColumn(name = "id_budget_item", referencedColumnName = "id_budget_item")
+            @JoinColumn(name = "id_operational_activity", referencedColumnName = "id_operational_activity"),
+            @JoinColumn(name = "id_budget_item", referencedColumnName = "id_budget_item"),
+            @JoinColumn(name = "order_item", referencedColumnName = "order_item")
         }
     )
     @MapKeyEnumerated(EnumType.STRING)

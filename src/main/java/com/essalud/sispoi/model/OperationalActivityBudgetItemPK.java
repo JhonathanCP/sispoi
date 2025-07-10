@@ -1,6 +1,7 @@
 package com.essalud.sispoi.model;
 import java.io.Serializable;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -25,5 +26,9 @@ public class OperationalActivityBudgetItemPK implements Serializable{
     @ManyToOne
     @JoinColumn(name = "id_operational_activity")
     private OperationalActivity operationalActivity;
+
+    @EqualsAndHashCode.Include
+    @Column(name = "order_item")
+    private Integer orderItem;
 
 }

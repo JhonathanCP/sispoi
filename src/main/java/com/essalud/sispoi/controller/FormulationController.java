@@ -105,7 +105,7 @@ public class FormulationController {
             @PathVariable("newQuarter") Integer newQuarter) {
 
         // Validate quarter input (1 to 4)
-        if (newQuarter < 1 || newQuarter > 4) {
+        if (newQuarter < 1 || newQuarter > 5) {
             throw new IllegalArgumentException("Quarter must be between 1 and 4.");
         }
 
