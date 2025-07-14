@@ -25,7 +25,7 @@ import jakarta.validation.Valid;
 
 
 @RestController
-@RequestMapping("/executed-executedgoal")
+@RequestMapping("/executed-goal")
 public class ExecutedGoalController {
 
     @Autowired
