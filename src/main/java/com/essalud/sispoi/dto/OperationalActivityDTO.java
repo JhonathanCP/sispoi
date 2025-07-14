@@ -56,12 +56,11 @@ public class OperationalActivityDTO {
     @Size(max = 250)
     private String measurementUnit;
 
-    private Float executedGoal;
-
-    private Float expectedGoal;
-
     @JsonManagedReference
     private List<GoalDTO> goals;
+
+    @JsonManagedReference
+    private List<ExecutedGoalDTO> executedGoals;
 
     @NotNull
     private PriorityDTO priority;

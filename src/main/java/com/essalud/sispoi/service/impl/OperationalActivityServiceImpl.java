@@ -5,6 +5,7 @@ import com.essalud.sispoi.model.CostCenter;
 import com.essalud.sispoi.model.Formulation;
 import com.essalud.sispoi.model.OperationalActivity;
 import com.essalud.sispoi.repo.ICostCenterRepo;
+import com.essalud.sispoi.repo.IOperationalActivityBudgetItemRepo;
 import com.essalud.sispoi.repo.IOperationalActivityRepo;
 import com.essalud.sispoi.repo._IGenericRepo;
 import com.essalud.sispoi.service.IOperationalActivityService;
@@ -22,6 +23,9 @@ public class OperationalActivityServiceImpl extends _CRUDImpl<OperationalActivit
 
     @Autowired
     private IOperationalActivityRepo repo;
+
+    @Autowired
+    private IOperationalActivityBudgetItemRepo operationalActivityBudgetItemRepository; // Inject the new repository
 
     @Autowired
     private ICostCenterRepo costCenterRepo;
@@ -56,6 +60,22 @@ public class OperationalActivityServiceImpl extends _CRUDImpl<OperationalActivit
                 .max(Comparator.comparingInt(Integer::parseInt)); // Parse as int for comparison
 
         return higherCorrelativeCode.orElse("000"); // Return the highest or "000" if none found (e.g., all were null/empty)
+    }
+
+    @Transactional // Ensures the whole operation is a single transaction
+    @Override // Assuming this is an override of an interface method
+    public void delete(Integer id) {
+        OperationalActivity obj = repo.findById(id)
+                                    .orElseThrow(() -> new ModelNotFoundException("ID NO EXISTE: " + id));
+
+        // 1. Eliminar todos los OperationalActivityBudgetItem asociados
+        //    Esto es CRÍTICO antes de eliminar la OperationalActivity principal.
+        operationalActivityBudgetItemRepository.deleteByOperationalActivity(obj);
+
+        // 2. Eliminar la OperationalActivity principal.
+        //    Gracias a cascade = CascadeType.ALL y orphanRemoval = true en 'goals',
+        //    los objetivos asociados también se eliminarán automáticamente.
+        repo.delete(obj);
     }
 
 }

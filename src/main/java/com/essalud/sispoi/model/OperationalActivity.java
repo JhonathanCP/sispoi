@@ -10,8 +10,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -73,18 +71,11 @@ public class OperationalActivity {
     @Column(length = 250, nullable = false)
     private String measurementUnit;
 
-    @Min(1)
-    @Max(250)
-    @Column(nullable = true)
-    private Float executedGoal;
-
-    @Min(1)
-    @Max(250)
-    @Column(nullable = true)
-    private Float expectedGoal;
-
     @OneToMany(mappedBy = "operationalActivity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Goal> goals;
+
+    @OneToMany(mappedBy = "operationalActivity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ExecutedGoal> executedGoals;
 
     @ManyToOne
     @JoinColumn(name = "id_priority", nullable = false, foreignKey = @ForeignKey(name = "FK_OPERATIONAL_ACTIVITY_PRIORITY"))

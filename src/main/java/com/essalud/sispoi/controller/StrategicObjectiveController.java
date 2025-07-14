@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.essalud.sispoi.dto.MinMaxYearsDTO;
 import com.essalud.sispoi.dto.StrategicObjectiveDTO;
 import com.essalud.sispoi.exception.ModelNotFoundException;
 import com.essalud.sispoi.model.StrategicObjective;
@@ -82,6 +83,12 @@ public class StrategicObjectiveController {
             service.delete(id);
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/years-range")
+    public ResponseEntity<MinMaxYearsDTO> getMinMaxYears() {
+        MinMaxYearsDTO minMaxYears = service.getMinMaxYears();
+        return new ResponseEntity<>(minMaxYears, HttpStatus.OK);
     }
 
 }

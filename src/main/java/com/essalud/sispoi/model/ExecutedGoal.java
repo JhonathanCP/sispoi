@@ -7,8 +7,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -23,28 +24,27 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class StrategicAction {
+public class ExecutedGoal {
 
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idStrategicAction;
-
-    @Column(length = 2, nullable = false)
-    private String code;
-
-    @Column(length = 500, nullable = false)
-    private String name;
+    private Integer idExecutedGoal;
     
     @Column(nullable = false, columnDefinition = "boolean default true")
     private Boolean active;
 
-    @OneToOne(mappedBy = "strategicAction")
-    private StrategicActionFile strategicActionFile;
-
     @ManyToOne
-    @JoinColumn(name = "id_strategic_objective", nullable = false, foreignKey = @ForeignKey(name = "FK_STRATEGIC_ACTION_STRATEGIC_OBJECTIVE"))
-    private StrategicObjective strategicObjective;
+    @JoinColumn(name = "id_operational_activity", nullable = false, foreignKey = @ForeignKey(name = "FK_EXECUTED_META_OPERATIONAL_ACTIVITY"))
+    private OperationalActivity operationalActivity;
+
+    @Min(1)
+    @Max(4)
+    @Column(nullable = false)
+    private Integer goalOrder;
+
+    @Column(nullable = false)
+    private Double value;
 
     @Column(nullable = false, columnDefinition = "timestamp default now()")
     private LocalDateTime createTime;

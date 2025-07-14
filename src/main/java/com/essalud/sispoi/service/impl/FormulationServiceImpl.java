@@ -2,11 +2,13 @@ package com.essalud.sispoi.service.impl;
 
 import com.essalud.sispoi.exception.ModelNotFoundException;
 import com.essalud.sispoi.model.Dependency;
+import com.essalud.sispoi.model.ExecutedGoal;
 import com.essalud.sispoi.model.Formulation;
 import com.essalud.sispoi.model.FormulationSupportFile;
 import com.essalud.sispoi.model.Goal;
 import com.essalud.sispoi.model.OperationalActivity;
 import com.essalud.sispoi.model.OperationalActivityBudgetItem;
+import com.essalud.sispoi.repo.IExecutedGoalRepo;
 import com.essalud.sispoi.repo.IFormulationRepo;
 import com.essalud.sispoi.repo.IFormulationSupportFileRepo;
 import com.essalud.sispoi.repo.IGoalRepo;
@@ -33,10 +35,16 @@ public class FormulationServiceImpl extends _CRUDImpl<Formulation, Integer> impl
 
     @Autowired
     private IFormulationSupportFileRepo formulationSupportFileRepo;
+
     @Autowired
     private IOperationalActivityRepo operationalActivityRepo;
+
     @Autowired
     private IGoalRepo goalRepo;
+
+    @Autowired
+    private IExecutedGoalRepo executedGoalRepo;
+
     @Autowired
     private IOperationalActivityBudgetItemRepo operationalActivityBudgetItemRepo;
 
@@ -101,8 +109,6 @@ public class FormulationServiceImpl extends _CRUDImpl<Formulation, Integer> impl
             newOpActivity.setCostCenter(originalOpActivity.getCostCenter());
             newOpActivity.setMeasurementType(originalOpActivity.getMeasurementType());
             newOpActivity.setMeasurementUnit(originalOpActivity.getMeasurementUnit());
-            newOpActivity.setExecutedGoal(originalOpActivity.getExecutedGoal());
-            newOpActivity.setExpectedGoal(originalOpActivity.getExpectedGoal());
             newOpActivity.setPriority(originalOpActivity.getPriority());
             newOpActivity.setGoods(originalOpActivity.getGoods());
             newOpActivity.setRemuneration(originalOpActivity.getRemuneration());
@@ -112,7 +118,7 @@ public class FormulationServiceImpl extends _CRUDImpl<Formulation, Integer> impl
             OperationalActivity savedNewOpActivity = operationalActivityRepo.save(newOpActivity);
             newOperationalActivities.add(savedNewOpActivity);
 
-            // 4. Replicate Goals for each OperationalActivity
+            // 4.A Replicate Goals for each OperationalActivity
             List<Goal> originalGoals = goalRepo.findByOperationalActivity(originalOpActivity);
             for (Goal originalGoal : originalGoals) {
                 Goal newGoal = new Goal();
@@ -122,6 +128,18 @@ public class FormulationServiceImpl extends _CRUDImpl<Formulation, Integer> impl
                 newGoal.setValue(originalGoal.getValue());
                 newGoal.setCreateTime(LocalDateTime.now());
                 goalRepo.save(newGoal);
+            }
+
+            // 4.B Replicate ExecutedGoals for each OperationalActivity
+            List<ExecutedGoal> originalExecutedGoals = executedGoalRepo.findByOperationalActivity(originalOpActivity);
+            for (ExecutedGoal originalExecutedGoal : originalExecutedGoals) {
+                ExecutedGoal newExecutedGoal = new ExecutedGoal();
+                newExecutedGoal.setActive(originalExecutedGoal.getActive());
+                newExecutedGoal.setOperationalActivity(savedNewOpActivity);
+                newExecutedGoal.setGoalOrder(originalExecutedGoal.getGoalOrder());
+                newExecutedGoal.setValue(originalExecutedGoal.getValue());
+                newExecutedGoal.setCreateTime(LocalDateTime.now());
+                executedGoalRepo.save(newExecutedGoal);
             }
 
             // 5. Replicate OperationalActivityBudgetItems for each OperationalActivity

@@ -15,6 +15,8 @@ public interface IOperationalActivityBudgetItemRepo extends _IGenericRepo<Operat
 
     void deleteByOperationalActivity_IdOperationalActivity(Integer idOperationalActivity);
 
+    void deleteByOperationalActivity(OperationalActivity operationalActivity);
+
     OperationalActivityBudgetItem findByOperationalActivity_IdOperationalActivityAndBudgetItem_IdBudgetItem(Integer idOperationalActivity, Integer idBudgetItem);
 
     void deleteByOperationalActivity_IdOperationalActivityAndBudgetItem_IdBudgetItem(Integer idOperationalActivity, Integer idBudgetItem);

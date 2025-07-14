@@ -73,6 +73,7 @@ public class OperationalActivityController {
 
         OperationalActivity updated = mapper.map(dto, OperationalActivity.class);
         updated.setGoals(existing.getGoals());
+        updated.setExecutedGoals(existing.getExecutedGoals());
         updated.setCreateTime(existing.getCreateTime());
 
         service.update(updated); // ✅ ACTUALIZACIÓN REAL
