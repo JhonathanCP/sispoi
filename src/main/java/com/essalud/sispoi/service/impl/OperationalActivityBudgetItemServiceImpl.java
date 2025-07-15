@@ -6,10 +6,13 @@ import com.essalud.sispoi.repo.IOperationalActivityBudgetItemRepo;
 import com.essalud.sispoi.repo._IGenericRepo;
 import com.essalud.sispoi.service.IOperationalActivityBudgetItemService;
 
+
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class OperationalActivityBudgetItemServiceImpl extends _CRUDImpl<OperationalActivityBudgetItem, OperationalActivityBudgetItemPK> implements IOperationalActivityBudgetItemService{
@@ -33,6 +36,7 @@ public class OperationalActivityBudgetItemServiceImpl extends _CRUDImpl<Operatio
     }
 
     @Override
+    @Transactional
     public void deleteByIds(Integer idOperationalActivity, Integer idBudgetItem) {
         repo.deleteByOperationalActivity_IdOperationalActivityAndBudgetItem_IdBudgetItem(idOperationalActivity, idBudgetItem);
     }

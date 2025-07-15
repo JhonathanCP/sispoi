@@ -12,12 +12,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapKeyColumn;
 import jakarta.persistence.MapKeyEnumerated;
-import jakarta.persistence.PrePersist;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
 import java.util.EnumMap;
 import java.util.Map;
 
@@ -40,9 +38,6 @@ public class OperationalActivityBudgetItem {
     @Column(name = "order_item")
     private Integer orderItem;
 
-    @Column(nullable = false, columnDefinition = "timestamp default now()")
-    private LocalDateTime createTime;
-
     @ElementCollection
     @CollectionTable(
         name = "operational_activity_budget_item_month_amount",
@@ -60,10 +55,5 @@ public class OperationalActivityBudgetItem {
     @ManyToOne
     @JoinColumn (name = "id_expense_type", referencedColumnName = "idExpenseType", nullable = false)
     private ExpenseType expenseType;
-
-    @PrePersist
-    protected void onCreate() {
-        this.createTime = LocalDateTime.now();
-    }
 
 }

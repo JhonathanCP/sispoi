@@ -95,7 +95,7 @@ public class OperationalActivityBudgetItemController {
         if (obj == null) {
             throw new ModelNotFoundException("IDs DO NOT EXIST: " + idOperationalActivity + ", " + idBudgetItem);
         }
-        dto.setCreateTime(obj.getCreateTime());
+        // dto.setCreateTime(obj.getCreateTime());
         service.update(mapper.map(dto, OperationalActivityBudgetItem.class));
         return new ResponseEntity<>(HttpStatus.OK);
     }
