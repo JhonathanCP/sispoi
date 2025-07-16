@@ -10,9 +10,9 @@ public interface IOperationalActivityBudgetItemService extends _ICRUD<Operationa
     
     List<OperationalActivityBudgetItem> findByOperationalActivity(Integer idOperationalActivity);
 
-    OperationalActivityBudgetItem findByIds(Integer idOperationalActivity, Integer idBudgetItem);
+    OperationalActivityBudgetItem findByIds(Integer idOperationalActivity, Integer idBudgetItem, Integer orderItem);
 
-    void deleteByIds(Integer idOperationalActivity, Integer idBudgetItem);
+    void deleteByIds(Integer idOperationalActivity, Integer idBudgetItem, Integer orderItem);
 
     void deleteByOperationalActivity(Integer idOperationalActivity);
 

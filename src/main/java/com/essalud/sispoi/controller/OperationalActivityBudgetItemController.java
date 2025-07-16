@@ -58,9 +58,10 @@ public class OperationalActivityBudgetItemController {
     @GetMapping("/{idOperationalActivity}/{idBudgetItem}")
     public ResponseEntity<OperationalActivityBudgetItemDTO> findById(
             @PathVariable Integer idOperationalActivity,
-            @PathVariable Integer idBudgetItem) {
+            @PathVariable Integer idBudgetItem,
+            @PathVariable Integer orderItem) {
 
-        OperationalActivityBudgetItem obj = service.findByIds(idOperationalActivity, idBudgetItem);
+        OperationalActivityBudgetItem obj = service.findByIds(idOperationalActivity, idBudgetItem, orderItem);
 
         if (obj == null) {
             throw new ModelNotFoundException("IDs DO NOT EXIST: " + idOperationalActivity + ", " + idBudgetItem);
@@ -90,10 +91,11 @@ public class OperationalActivityBudgetItemController {
     public ResponseEntity<OperationalActivityBudgetItem> update(@Valid @RequestBody OperationalActivityBudgetItemDTO dto) {
         Integer idOperationalActivity = dto.getOperationalActivity().getIdOperationalActivity();
         Integer idBudgetItem = dto.getBudgetItem().getIdBudgetItem();
+        Integer orderItem = dto.getOrderItem();
 
-        OperationalActivityBudgetItem obj = service.findByIds(idOperationalActivity, idBudgetItem);
+        OperationalActivityBudgetItem obj = service.findByIds(idOperationalActivity, idBudgetItem, orderItem);
         if (obj == null) {
-            throw new ModelNotFoundException("IDs DO NOT EXIST: " + idOperationalActivity + ", " + idBudgetItem);
+            throw new ModelNotFoundException("IDs DO NOT EXIST: " + idOperationalActivity + ", " + idBudgetItem + ","+ orderItem);
         }
         // dto.setCreateTime(obj.getCreateTime());
         service.update(mapper.map(dto, OperationalActivityBudgetItem.class));
@@ -104,14 +106,15 @@ public class OperationalActivityBudgetItemController {
     @DeleteMapping("/{idOperationalActivity}/{idBudgetItem}")
     public ResponseEntity<Void> deleteById(
             @PathVariable Integer idOperationalActivity,
-            @PathVariable Integer idBudgetItem) {
+            @PathVariable Integer idBudgetItem,
+            @PathVariable Integer orderItem) {
 
-        OperationalActivityBudgetItem obj = service.findByIds(idOperationalActivity, idBudgetItem);
+        OperationalActivityBudgetItem obj = service.findByIds(idOperationalActivity, idBudgetItem, orderItem);
 
         if (obj == null) {
-            throw new ModelNotFoundException("IDs DO NOT EXIST: " + idOperationalActivity + ", " + idBudgetItem);
+            throw new ModelNotFoundException("IDs DO NOT EXIST: " + idOperationalActivity + ", " + idBudgetItem + ","+ orderItem);
         }
-        service.deleteByIds(idOperationalActivity, idBudgetItem);
+        service.deleteByIds(idOperationalActivity, idBudgetItem, orderItem);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

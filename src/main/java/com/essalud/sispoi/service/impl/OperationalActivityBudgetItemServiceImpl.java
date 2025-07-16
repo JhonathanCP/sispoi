@@ -31,14 +31,14 @@ public class OperationalActivityBudgetItemServiceImpl extends _CRUDImpl<Operatio
     }
 
     @Override
-    public OperationalActivityBudgetItem findByIds(Integer idOperationalActivity, Integer idBudgetItem) {
-        return repo.findByOperationalActivity_IdOperationalActivityAndBudgetItem_IdBudgetItem(idOperationalActivity, idBudgetItem);
+    public OperationalActivityBudgetItem findByIds(Integer idOperationalActivity, Integer idBudgetItem, Integer orderItem) {
+        return repo.findByOperationalActivity_IdOperationalActivityAndBudgetItem_IdBudgetItemAndOrderItem(idOperationalActivity, idBudgetItem, orderItem);
     }
 
     @Override
     @Transactional
-    public void deleteByIds(Integer idOperationalActivity, Integer idBudgetItem) {
-        repo.deleteByOperationalActivity_IdOperationalActivityAndBudgetItem_IdBudgetItem(idOperationalActivity, idBudgetItem);
+    public void deleteByIds(Integer idOperationalActivity, Integer idBudgetItem, Integer orderItem) {
+        repo.deleteByOperationalActivity_IdOperationalActivityAndBudgetItem_IdBudgetItemAndOrderItem(idOperationalActivity, idBudgetItem, orderItem);
     }
 
     @Override

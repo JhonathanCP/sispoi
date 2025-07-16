@@ -17,9 +17,17 @@ public interface IOperationalActivityBudgetItemRepo extends _IGenericRepo<Operat
 
     void deleteByOperationalActivity(OperationalActivity operationalActivity);
 
-    OperationalActivityBudgetItem findByOperationalActivity_IdOperationalActivityAndBudgetItem_IdBudgetItem(Integer idOperationalActivity, Integer idBudgetItem);
+    OperationalActivityBudgetItem findByOperationalActivity_IdOperationalActivityAndBudgetItem_IdBudgetItemAndOrderItem(
+        Integer idOperationalActivity,
+        Integer idBudgetItem,
+        Integer orderItem
+    );
 
-    void deleteByOperationalActivity_IdOperationalActivityAndBudgetItem_IdBudgetItem(Integer idOperationalActivity, Integer idBudgetItem);
+    void deleteByOperationalActivity_IdOperationalActivityAndBudgetItem_IdBudgetItemAndOrderItem(
+        Integer idOperationalActivity,
+        Integer idBudgetItem,
+        Integer orderItem
+    );
 
     List<OperationalActivityBudgetItem> findByOperationalActivity(OperationalActivity operationalActivity);
 
