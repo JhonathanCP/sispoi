@@ -1,6 +1,7 @@
 package com.essalud.sispoi.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -35,11 +36,11 @@ public class Formulation {
     @Column(nullable = false, columnDefinition = "boolean default true")
     private Boolean active;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_dependency", nullable = false, foreignKey = @ForeignKey(name = "FK_FORMULATION_DEPENDENCY"))
     private Dependency dependency;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_formulation_state", nullable = false, foreignKey = @ForeignKey(name = "FK_FORMULATION_FORMULATION_STATE"))
     private FormulationState formulationState;
 

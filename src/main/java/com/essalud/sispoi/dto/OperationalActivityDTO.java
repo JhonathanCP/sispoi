@@ -29,8 +29,12 @@ public class OperationalActivityDTO {
     private String correlativeCode;
 
     @NotNull
-    @Size(max = 500)
+    @Size(max = 1000)
     private String name;
+
+    @NotNull
+    @Size(max = 5000)
+    private String description;
     
     private Boolean active = true;
 

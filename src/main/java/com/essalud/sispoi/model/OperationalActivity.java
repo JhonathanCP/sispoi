@@ -38,8 +38,11 @@ public class OperationalActivity {
     @Column(length = 3)
     private String correlativeCode;
 
-    @Column(length = 500, nullable = false)
+    @Column(length = 1000, nullable = false)
     private String name;
+
+    @Column(length = 5000, nullable = false)
+    private String description;
     
     @Column(nullable = false, columnDefinition = "boolean default true")
     private Boolean active;

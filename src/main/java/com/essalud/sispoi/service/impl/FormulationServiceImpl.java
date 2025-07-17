@@ -101,6 +101,7 @@ public class FormulationServiceImpl extends _CRUDImpl<Formulation, Integer> impl
             newOpActivity.setSapCode(originalOpActivity.getSapCode());
             newOpActivity.setCorrelativeCode(originalOpActivity.getCorrelativeCode());
             newOpActivity.setName(originalOpActivity.getName());
+            newOpActivity.setDescription(originalOpActivity.getDescription());
             newOpActivity.setActive(originalOpActivity.getActive());
             newOpActivity.setStrategicAction(originalOpActivity.getStrategicAction());
             newOpActivity.setFormulation(savedNewFormulation);

@@ -40,20 +40,27 @@ public class FormulationSupportFileController {
     private IFormulationService formulationService;
 
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-	public ResponseEntity<Integer> saveFormulationSupportFile(@RequestParam("file") MultipartFile file) throws Exception{
+    public ResponseEntity<Integer> saveFormulationSupportFile(
+            @RequestParam("file") MultipartFile file,
+            @RequestParam("idFormulation") Integer idFormulation
+    ) throws Exception {
 
-		int rpta = 0;
+        Formulation formulation = formulationService.findById(idFormulation);
+        if (formulation == null) {
+            throw new ModelNotFoundException("Formulation ID DOES NOT EXIST: " + idFormulation);
+        }
 
-		FormulationSupportFile ar = new FormulationSupportFile();
-		ar.setFileExtension(file.getContentType());
-		ar.setName(file.getOriginalFilename());
-		ar.setFile(file.getBytes());
+        FormulationSupportFile ar = new FormulationSupportFile();
+        ar.setFileExtension(file.getContentType());
+        ar.setName(file.getOriginalFilename());
+        ar.setFile(file.getBytes());
         ar.setActive(true);
+        ar.setFormulation(formulation); // ✅ asociar la entidad
 
-		rpta = service.saveFile(ar);
+        int rpta = service.saveFile(ar);
+        return new ResponseEntity<>(rpta, HttpStatus.OK);
+    }
 
-		return new ResponseEntity<Integer>(rpta, HttpStatus.OK);
-	}
 
     @PostMapping(value = "/update", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity<Void> updateFormulationSupportFile(

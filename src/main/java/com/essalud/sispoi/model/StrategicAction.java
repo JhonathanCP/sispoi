@@ -1,6 +1,7 @@
 package com.essalud.sispoi.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -42,7 +43,7 @@ public class StrategicAction {
     @OneToOne(mappedBy = "strategicAction")
     private StrategicActionFile strategicActionFile;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_strategic_objective", nullable = false, foreignKey = @ForeignKey(name = "FK_STRATEGIC_ACTION_STRATEGIC_OBJECTIVE"))
     private StrategicObjective strategicObjective;
 

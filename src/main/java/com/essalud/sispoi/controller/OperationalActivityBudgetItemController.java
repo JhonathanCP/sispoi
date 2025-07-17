@@ -103,7 +103,7 @@ public class OperationalActivityBudgetItemController {
     }
 
     // Eliminar un registro específico por ambos IDs
-    @DeleteMapping("/{idOperationalActivity}/{idBudgetItem}")
+    @DeleteMapping("/{idOperationalActivity}/{idBudgetItem}/{orderItem}")
     public ResponseEntity<Void> deleteById(
             @PathVariable Integer idOperationalActivity,
             @PathVariable Integer idBudgetItem,

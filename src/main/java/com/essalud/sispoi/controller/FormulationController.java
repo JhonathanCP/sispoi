@@ -70,7 +70,7 @@ public class FormulationController {
             throw new ModelNotFoundException("ID DOES NOT EXIST: " + dto.getIdFormulation());
         }
         dto.setCreateTime(obj.getCreateTime());
-        return new ResponseEntity<>(service.update(mapper.map(dto, Formulation.class)), HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
